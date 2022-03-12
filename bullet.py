@@ -8,7 +8,7 @@ class Bullet:
     size = 5
     initial_y = 10  # fire from top of spaceship
 
-    def __init__(self):
+    def __init__(self, color='purple'):
         self.x = 0
         self.y = 0
         self.alive = False
@@ -16,17 +16,19 @@ class Bullet:
         self.turtle = turtle.Turtle()
         self.turtle.hideturtle()
         self.turtle.up()
-        self.turtle.color("purple")
+        self.turtle.color(color)
 
     def fire(self, x=0, y=0):
         self.x = x
         self.y = y + Bullet.initial_y
         self.alive = True
+        self.turtle.showturtle()
 
     def move(self):
         self.y += Bullet.speed
         if self.y > turtle.window_height() / 2:
             self.alive = False
+            self.turtle.hideturtle()
 
     def draw(self):
         self.turtle.clear()
@@ -39,7 +41,7 @@ if __name__ == '__main__':
     screen = turtle.Screen()
 
     bullets = list()
-    bullets.append(Bullet())
+    bullets.append(Bullet(color='purple'))
 
     def fire():
         add_bullet = True
@@ -49,7 +51,7 @@ if __name__ == '__main__':
                 break
 
         if add_bullet:
-            b = Bullet()
+            b = Bullet(color='purple')
             bullets.append(b)
 
         b.fire(x=random.randint(-100, 100))
